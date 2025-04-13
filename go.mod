@@ -1,4 +1,4 @@
-module api
+module fyi
 
 go 1.24.2
 
