@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
@@ -31,14 +32,14 @@ type AboutInfo struct {
 }
 
 type Experience struct {
-	Title       string   `json:"title"`
-	Company     string   `json:"company"`
-	Location    string   `json:"location"`
-	StartDate   string   `json:"start_date"`
-	Active      bool     `json:"active"`
-	EndDate     *string  `json:"end_date"`
-	Tags        []string `json:"tags"`
-	Description string   `json:"description"`
+	Title       string     `json:"title"`
+	Company     string     `json:"company"`
+	Location    string     `json:"location"`
+	StartDate   *time.Time `json:"start_date"`
+	Active      bool       `json:"active"`
+	EndDate     *time.Time `json:"end_date"`
+	Tags        []string   `json:"tags"`
+	Description string     `json:"description"`
 }
 
 type Project struct {
@@ -85,12 +86,24 @@ func about(w http.ResponseWriter, r *http.Request) {
 }
 
 func experience(w http.ResponseWriter, r *http.Request) {
+	// Helper function to parse dates
+	parseDate := func(dateStr string) *time.Time {
+		if dateStr == "" {
+			return nil
+		}
+		t, err := time.Parse("2006-01-02", dateStr)
+		if err != nil {
+			return nil
+		}
+		return &t
+	}
+
 	experiences := []Experience{
 		{
 			Title:       "Senior Remote Software Engineer",
 			Company:     "Zoomph",
 			Location:    "Remote, Virginia",
-			StartDate:   "2015-06-01",
+			StartDate:   parseDate("2015-06-01"),
 			Active:      true,
 			EndDate:     nil,
 			Tags:        []string{"salaried"},
@@ -100,7 +113,7 @@ func experience(w http.ResponseWriter, r *http.Request) {
 			Title:       "Hot Yoga Instructor",
 			Company:     "Corepower Yoga",
 			Location:    "Northern Virginia",
-			StartDate:   "",
+			StartDate:   nil, // No start date provided
 			Active:      true,
 			EndDate:     nil,
 			Tags:        []string{"hourly"},
@@ -110,9 +123,9 @@ func experience(w http.ResponseWriter, r *http.Request) {
 			Title:       "Social Outreach Coordinator",
 			Company:     "CDCN",
 			Location:    "Northern Virginia",
-			StartDate:   "2008-01-01",
+			StartDate:   parseDate("2008-01-01"),
 			Active:      false,
-			EndDate:     "2012-01-01",
+			EndDate:     parseDate("2012-01-01"),
 			Tags:        []string{"hourly"},
 			Description: "",
 		},
@@ -120,9 +133,9 @@ func experience(w http.ResponseWriter, r *http.Request) {
 			Title:       "Barista",
 			Company:     "Borjo Coffee",
 			Location:    "Norfolk, Virginia",
-			StartDate:   "",
+			StartDate:   nil, // No start date provided
 			Active:      false,
-			EndDate:     "2015-05-01",
+			EndDate:     parseDate("2015-05-01"),
 			Tags:        []string{"hourly"},
 			Description: "I made coffee, made food, and helped organize concerts. The coffee shop was a popular spot for locals so I have fond memories of working there.",
 		},
@@ -130,9 +143,9 @@ func experience(w http.ResponseWriter, r *http.Request) {
 			Title:       "Sales Associate",
 			Company:     "Autozone",
 			Location:    "Warrenton, Virginia",
-			StartDate:   "2011-01-01",
+			StartDate:   parseDate("2011-01-01"),
 			Active:      false,
-			EndDate:     "2011-04-01",
+			EndDate:     parseDate("2011-04-01"),
 			Tags:        []string{"hourly"},
 			Description: "",
 		},
@@ -140,9 +153,9 @@ func experience(w http.ResponseWriter, r *http.Request) {
 			Title:       "Sales Associate",
 			Company:     "Play N' Trade Videogames",
 			Location:    "Warrenton, Virginia",
-			StartDate:   "2010-06-01",
+			StartDate:   parseDate("2010-06-01"),
 			Active:      false,
-			EndDate:     "2010-11-01",
+			EndDate:     parseDate("2010-11-01"),
 			Tags:        []string{"hourly"},
 			Description: "",
 		},
@@ -150,9 +163,9 @@ func experience(w http.ResponseWriter, r *http.Request) {
 			Title:       "Barista",
 			Company:     "Starbucks Coffee",
 			Location:    "Warrenton, Virginia",
-			StartDate:   "2007-01-01",
+			StartDate:   parseDate("2007-01-01"),
 			Active:      false,
-			EndDate:     "2008-01-01",
+			EndDate:     parseDate("2008-01-01"),
 			Tags:        []string{"hourly"},
 			Description: "",
 		},
@@ -160,9 +173,9 @@ func experience(w http.ResponseWriter, r *http.Request) {
 			Title:       "Associate",
 			Company:     "Panera Bread",
 			Location:    "Warrenton, Virginia",
-			StartDate:   "2006-01-01",
+			StartDate:   parseDate("2006-01-01"),
 			Active:      false,
-			EndDate:     "2008-01-01",
+			EndDate:     parseDate("2008-01-01"),
 			Tags:        []string{"hourly"},
 			Description: "",
 		},
@@ -206,8 +219,8 @@ func contact(w http.ResponseWriter, r *http.Request) {
 func notFound(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotFound)
 	json.NewEncoder(w).Encode(map[string]interface{}{
-		"error":              "Not found",
-		"message":            "The requested URL was not found on this server.",
+		"error":               "Not found",
+		"message":             "The requested URL was not found on this server.",
 		"available_endpoints": []string{"/", "/about", "/projects", "/contact"},
 	})
 }
@@ -238,7 +251,7 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "5000"
+		port = "6000"
 	}
 
 	log.Printf("Server starting on port %s", port)
