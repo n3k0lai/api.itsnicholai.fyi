@@ -116,17 +116,17 @@ func experience(w http.ResponseWriter, r *http.Request) {
 			StartDate:   nil, // No start date provided
 			Active:      true,
 			EndDate:     nil,
-			Tags:        []string{"hourly"},
+			Tags:        []string{"hourly", "social"},
 			Description: "I am an internationally certified hot yoga instructor, and I teach twice-weekly classes in 100+ degree rooms.",
 		},
 		{
-			Title:       "Social Outreach Coordinator",
+			Title:       "Social Outreach Attendant",
 			Company:     "CDCN",
 			Location:    "Northern Virginia",
 			StartDate:   parseDate("2008-01-01"),
 			Active:      false,
 			EndDate:     parseDate("2012-01-01"),
-			Tags:        []string{"hourly"},
+			Tags:        []string{"hourly", "social"},
 			Description: "",
 		},
 		{
@@ -136,7 +136,7 @@ func experience(w http.ResponseWriter, r *http.Request) {
 			StartDate:   nil, // No start date provided
 			Active:      false,
 			EndDate:     parseDate("2015-05-01"),
-			Tags:        []string{"hourly"},
+			Tags:        []string{"hourly", "social", "service"},
 			Description: "I made coffee, made food, and helped organize concerts. The coffee shop was a popular spot for locals so I have fond memories of working there.",
 		},
 		{
@@ -146,7 +146,7 @@ func experience(w http.ResponseWriter, r *http.Request) {
 			StartDate:   parseDate("2011-01-01"),
 			Active:      false,
 			EndDate:     parseDate("2011-04-01"),
-			Tags:        []string{"hourly"},
+			Tags:        []string{"hourly", "social", "retail", "commissioned"},
 			Description: "",
 		},
 		{
@@ -156,7 +156,7 @@ func experience(w http.ResponseWriter, r *http.Request) {
 			StartDate:   parseDate("2010-06-01"),
 			Active:      false,
 			EndDate:     parseDate("2010-11-01"),
-			Tags:        []string{"hourly"},
+			Tags:        []string{"hourly", "social", "retail", "commissioned"},
 			Description: "",
 		},
 		{
@@ -166,7 +166,7 @@ func experience(w http.ResponseWriter, r *http.Request) {
 			StartDate:   parseDate("2007-01-01"),
 			Active:      false,
 			EndDate:     parseDate("2008-01-01"),
-			Tags:        []string{"hourly"},
+			Tags:        []string{"hourly", "service"},
 			Description: "",
 		},
 		{
@@ -176,7 +176,7 @@ func experience(w http.ResponseWriter, r *http.Request) {
 			StartDate:   parseDate("2006-01-01"),
 			Active:      false,
 			EndDate:     parseDate("2008-01-01"),
-			Tags:        []string{"hourly"},
+			Tags:        []string{"hourly", "service"},
 			Description: "",
 		},
 	}
