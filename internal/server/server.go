@@ -6,7 +6,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/rs/cors"
 
-	"your-module-path/internal/handlers"
+	"fyi/internal/handlers"
 )
 
 func NewRouter() http.Handler {

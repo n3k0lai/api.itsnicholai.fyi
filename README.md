@@ -22,10 +22,10 @@ curl -X GET http://localhost:6000/about | bat -l json
 
 Build the Docker image:
 ```
-docker build -t nicholai-api .
+docker build -t fyi .
 ```
 
 Run the container:
 ```
-docker run -p 6000:6000 nicholai-api
+docker run -p 6000:6000 fyi
 ```
