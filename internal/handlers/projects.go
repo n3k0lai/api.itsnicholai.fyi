@@ -10,18 +10,18 @@ import (
 func Projects(w http.ResponseWriter, r *http.Request) {
 	projects := []models.Project{
 		{
-			Name:         "Project 1",
-			Description:  "Description of Project 1",
-			Technologies: []string{"Tech 1", "Tech 2"},
-			URL:          "https://project1-url.com",
-			Github:       "https://github.com/nicholai/project1",
+			Name:         "My API",
+			Description:  "the API powering this website",
+			Technologies: []string{"go", "docker"},
+			URL:          "https://api.itsnicholai.fyi",
+			Github:       "https://github.com/n3k0lai/fyi",
 		},
 		{
-			Name:         "Project 2",
-			Description:  "Description of Project 2",
-			Technologies: []string{"Tech 3", "Tech 4"},
-			URL:          "https://project2-url.com",
-			Github:       "https://github.com/nicholai/project2",
+			Name:         "My Website",
+			Description:  "the website you're currently viewing",
+			Technologies: []string{"typescript"},
+			URL:          "https://itsnicholai.fyi",
+			Github:       "https://github.com/nicholai/itsnicholai.fyi",
 		},
 	}
 	json.NewEncoder(w).Encode(projects)

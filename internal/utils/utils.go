@@ -2,7 +2,6 @@ package utils
 
 import "time"
 
-// ParseDate helper function to parse dates
 func ParseDate(dateStr string) *time.Time {
 	if dateStr == "" {
 		return nil

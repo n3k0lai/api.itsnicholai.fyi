@@ -36,7 +36,7 @@ func Experience(w http.ResponseWriter, r *http.Request) {
 			Title:       "Hot Yoga Instructor",
 			Company:     "Corepower Yoga",
 			Location:    "Northern Virginia",
-			StartDate:   nil, // No start date provided
+			StartDate:   nil, // TODO: Add start date
 			Active:      true,
 			EndDate:     nil,
 			Tags:        []string{"hourly", "social"},
@@ -56,7 +56,7 @@ func Experience(w http.ResponseWriter, r *http.Request) {
 			Title:       "Barista",
 			Company:     "Borjo Coffee",
 			Location:    "Norfolk, Virginia",
-			StartDate:   nil, // No start date provided
+			StartDate:   nil, // TODO: Add start date
 			Active:      false,
 			EndDate:     parseDate("2015-05-01"),
 			Tags:        []string{"hourly", "social", "service"},
