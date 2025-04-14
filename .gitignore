@@ -5,6 +5,11 @@
 *.so
 *.dylib
 
+# Nix build output
+result
+result-*
+.direnv/
+
 # Test binary, built with `go test -c`
 *.test
 
